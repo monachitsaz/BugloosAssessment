@@ -1,5 +1,10 @@
 # BugloosAssessment
 
+This project is an assessment one for Bugloos company developed by Mona Chitsaz.
+
+This is an application for user log in and selecting some items.
+
+------------------------------------------------------------------------------------------------------
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.3.
 
 ## Development server
