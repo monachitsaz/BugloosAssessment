@@ -16,11 +16,14 @@ div.login-form-container {
     margin-top:0.4em;
     height: 2.5em;
 }
-.input{
-    margin-bottom: 1.2em;
-}
+
 .label{
     margin-right: 1em;
+}
+
+.validation{
+    color: red;
+    margin-bottom: 1.2em;
 }
 
 

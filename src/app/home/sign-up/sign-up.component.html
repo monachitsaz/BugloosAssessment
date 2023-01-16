@@ -1,0 +1,71 @@
+<div class="container login-form row">
+    <div class="login-form-container col-5 offset-6">
+        <form [formGroup]="formGroup" (ngSubmit)="registerUser()">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Name" formControlName="userName">
+                <small class="validation"
+                    *ngIf="this.formGroup.get('userName')?.touched && this.formGroup.get('userName')?.errors?.required">Enter
+                    Name
+                </small>
+                <small class="validation" *ngIf="this.formGroup.get('userName')?.errors?.maxlength">Name must have
+                    maximum 10 characters
+                </small>
+                <small class="validation" *ngIf="this.formGroup.get('userName')?.errors?.minlength">Name must have
+                    minimum 2 characters
+                </small>
+            </div>
+
+            <div class="form-group">
+                <input type="email" class="form-control" formControlName="email" placeholder="Email">
+                <small class="validation"
+                    *ngIf="this.formGroup.get('email')?.touched && this.formGroup.get('email')?.errors?.required">Enter
+                    Email
+                </small>
+                <small class="validation" *ngIf="this.formGroup.get('email')?.errors?.email">Email is not in a correct
+                    format
+                </small>
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="form-control" formControlName="password" placeholder="password">
+                <small class="validation"
+                    *ngIf="this.formGroup.get('password')?.touched && this.formGroup.get('password')?.errors?.required">Enter
+                    Password
+                </small>
+                <small class="validation" *ngIf="this.formGroup.get('password')?.errors?.maxlength">Password must have
+                    maximum 10 characters
+                </small>
+                <small class="validation" *ngIf="this.formGroup.get('password')?.errors?.minlength">Password must have
+                    minimum 3 characters
+                </small>
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="form-control" formControlName="confirmPassword"
+                    placeholder="Confirm Password">
+
+
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox"  required="true" class="form-check-input" formControlName="formIsChecked">
+                <label class="form-check-label">Agree to terms & conditions</label>
+            </div>
+            <div>
+                <input type="radio" checked class="form-check-input" value="male" name="gender" formControlName="gender">
+                male  
+                <input type="radio" class="form-check-input" value="female" name="gender" formControlName="gender">
+                female
+
+
+            </div>
+
+            <button [disabled]="formGroup.invalid" type="submit" class="btn btn-success form-control">Create an
+                account</button>
+
+            <button type="submit" class="btn btn-primary form-control">Sign up with Google</button>
+        </form>
+    </div>
+
+
+</div>
