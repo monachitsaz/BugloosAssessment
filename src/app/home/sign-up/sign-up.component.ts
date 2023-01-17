@@ -1,3 +1,4 @@
+import { NotificationService } from './../../services/notification.service';
 import { IUser } from 'src/app/models/user.model';
 import { ApiService } from './../../services/api.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class SignUpComponent implements OnInit {
 
   formGroup: FormGroup;
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private notification:NotificationService) {
 
   }
 
@@ -42,10 +43,12 @@ export class SignUpComponent implements OnInit {
       this.api.create(infoData, "User")
         .subscribe(
           {
-            next: (response) => { alert(response) },
+            next: (response) => {
+              this.notification.showSuccess(response,'Info')
+            },
             error: (error: HttpErrorResponse) => {
        
-
+              this.notification.showError('response','Info')
             }
           }
         )

@@ -4,13 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { SharedRoutingModule } from './shared-routing.module';
-
+import { ToastrModule } from 'ngx-toastr';
 const COMPONENTs = []
 const MODULES = [CommonModule,
   SharedRoutingModule,
   FormsModule,
   ReactiveFormsModule,
-  HttpClientModule]
+  HttpClientModule,ToastrModule.forRoot(),]
 
   
 @NgModule({
@@ -18,6 +18,11 @@ const MODULES = [CommonModule,
   imports: [
     MODULES
   ],
-  exports: [COMPONENTs, MODULES]
+  exports: [COMPONENTs, MODULES],
+  providers:[
+    
+  ]
+
+  
 })
 export class SharedModule { }
