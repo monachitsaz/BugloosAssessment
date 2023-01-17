@@ -47,8 +47,7 @@ export class SignUpComponent implements OnInit {
               this.notification.showSuccess(response,'Info')
             },
             error: (error: HttpErrorResponse) => {
-       
-              this.notification.showError('response','Info')
+              this.notification.showError(error,'oops!')
             }
           }
         )
