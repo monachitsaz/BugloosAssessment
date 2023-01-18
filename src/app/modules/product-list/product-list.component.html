@@ -1,0 +1,31 @@
+<div class="products-container">
+    <h4><strong>All Courses</strong></h4>
+
+    <div class="row">
+        <ng-container *ngFor="let item of products$ | async;let i=index">
+            <div class="col-md-4 course-item">
+
+                <img [src]="transform(item.thumbnailBase64)" class="course-img">
+                <p class="course-title">{{item.title}}</p>
+
+                <p class="course-text">{{item.text}}</p>
+                <!-- <ng-container *ngIf="!courseAdded; else elseTemplate"> -->
+
+                Add this course to your plan
+                <input type="checkbox" (change)="selectCourse($event,item)" [checked]="courseAdded">
+                <!-- </ng-container> -->
+                <!-- <ng-template #elseTemplate> -->
+                <!-- <button class="btn btn-sm btn-primary col-12 active"
+                        (click)="selectCourse($event,item.id)"><small>Added</small></button> -->
+                <!-- [ngClass]="{'green' : toggle, 'red': !toggle}">
+                        {{status}} -->
+                <!-- </ng-template> -->
+
+
+
+            </div>
+        </ng-container>
+        <button class="btn btn-sm col-12 btn-primary" (click)="saveCourses()">
+            <small>{{buttonValue}}</small></button>
+    </div>
+</div>

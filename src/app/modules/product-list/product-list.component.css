@@ -1,0 +1,38 @@
+
+.products-container{
+    width: 63%;
+    margin: auto;
+}
+
+.course-item{
+    border:2px solid green;
+    border-radius: 0.5em;
+    margin:2px;
+    height: fit-content;
+}
+
+.course-img{
+    width:100%;
+    height: 70%;
+}
+
+.course-title{
+    font-size: 0.8em;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.course-text{
+    font-size: 0.9em;
+    text-align: justify;
+}
+.btn{
+    margin-bottom: .5em;
+}
+
+.active{
+    background-color: red;
+}
+
+

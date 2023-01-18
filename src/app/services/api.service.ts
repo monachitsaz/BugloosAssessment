@@ -50,4 +50,9 @@ export class ApiService {
     return this.http.delete(`${this.baseUrl}/${url}`);
   }
 
+  
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(this.baseUrl+'/Login', { username, password }, httpOptions)
+  }
+
 }

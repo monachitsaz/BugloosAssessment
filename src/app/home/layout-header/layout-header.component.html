@@ -7,14 +7,15 @@
   <img class="nav-item logo-img" src="../../../assets/logo.png" alt="" loading="lazy" />
   <div class="nav-items">
     <a>Home</a>
-    <a routerLink="">All Course</a>
-    <a routerLink="">Pages</a>
+    <a routerLink='/courses'>All Course</a>
+    <a routerLink="my-courses">My Courses</a>
     <a routerLink="">Blog</a>
     <a routerLink="">Contact</a>
   </div>
 
   <div class="signinup">
-    <a routerLink="" class="signin-btn">Sign In</a>
-    <a type="button" routerLink="" class="btn singup-btn"><strong>Sign Up</strong></a>
+    <!-- <a *ngIf="!isLogin" (click)="logOut()"  routerLink='/login' class="signin-btn">{{signInValue}}</a> -->
+    <a  routerLink='sign-in' class="signin-btn">Sign in</a>
+    <a type="button" routerLink='register' class="btn singup-btn"><strong>Sign Up</strong></a>
   </div>
 </div>

@@ -1,11 +1,7 @@
 export interface IUser{
+    id:number;
     userName:string;
     password:string;
     email:string;
-    gender:IGender;
-}
-
-export enum IGender{
-    male,
-    female
+    gender:string;
 }

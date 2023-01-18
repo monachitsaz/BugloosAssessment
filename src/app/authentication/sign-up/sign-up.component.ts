@@ -1,9 +1,10 @@
-import { NotificationService } from './../../services/notification.service';
+import { NotificationService } from '../../services/notification.service';
 import { IUser } from 'src/app/models/user.model';
-import { ApiService } from './../../services/api.service';
-import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../services/api.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sign-up',
@@ -13,7 +14,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class SignUpComponent implements OnInit {
 
   formGroup: FormGroup;
-  constructor(private api: ApiService, private notification:NotificationService) {
+  @Output() isSignup = new EventEmitter();
+
+
+  constructor(private api: ApiService, 
+    private notification:NotificationService,
+    private router:Router) {
 
   }
 
@@ -34,6 +40,7 @@ export class SignUpComponent implements OnInit {
   registerUser() {
     if (this.formGroup.controls.password.value == this.formGroup.controls.confirmPassword.value) {
       let infoData: IUser = {
+        id:0,
         userName: this.formGroup.controls.userName.value,
         password: this.formGroup.controls.password.value,
         email: this.formGroup.controls.email.value,
@@ -44,7 +51,9 @@ export class SignUpComponent implements OnInit {
         .subscribe(
           {
             next: (response) => {
-              this.notification.showSuccess(response,'Info')
+              this.notification.showSuccess(response,'Info');
+               this.isSignup.emit();
+              // this.router.navigate(['/login']);
             },
             error: (error: HttpErrorResponse) => {
               this.notification.showError(error,'oops!')
@@ -56,7 +65,10 @@ export class SignUpComponent implements OnInit {
       this.formGroup.controls.gender.setValue('male');
     }
     else {
-      alert("Password does'nt match")
+      this.notification.showError("Password does'nt match",'oops!')
     }
   }
+
+  
+ 
 }

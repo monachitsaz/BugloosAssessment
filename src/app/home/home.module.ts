@@ -3,19 +3,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
-import { LayoutComponent } from './layout/layout.component'
-import { SignUpComponent } from './sign-up/sign-up.component';
 import { LayoutFooterComponent } from './layout-footer/layout-footer.component';
 import { LayoutHeaderComponent } from './layout-header/layout-header.component';
-
+import { SignUpComponent } from '../authentication/sign-up/sign-up.component';
+import { LoginComponent } from '../authentication/login/login.component';
 
 @NgModule({
-  declarations: [LayoutComponent, SignUpComponent,
-    LayoutFooterComponent, LayoutHeaderComponent],
+  declarations: [
+    LayoutFooterComponent, LayoutHeaderComponent,SignUpComponent,LoginComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
     SharedModule
-  ]
+  ],
+  exports:[LayoutFooterComponent, LayoutHeaderComponent,SignUpComponent,LoginComponent]
 })
 export class HomeModule { }
