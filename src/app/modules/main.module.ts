@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 
 import { MainRoutingModule } from './main-routing.module';
 import { ProductListComponent } from './product-list/product-list.component';
-import { LoginComponent } from '../authentication/login/login.component';
 import { MyCoursesComponent } from './my-courses/my-courses.component';
 
 

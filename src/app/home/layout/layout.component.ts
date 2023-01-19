@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'layout',
@@ -7,5 +8,25 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class LayoutComponent {
 
- 
+
+  signInValue: string='Sign In'
+  showLogOutBtn: boolean=false;
+  
+
+  onOutletLoaded(event) {
+
+    if (window.localStorage.getItem('userId')) {
+
+      this.signInValue = 'Sign Out';
+      this.showLogOutBtn = true;
+    }
+    else {
+      this.signInValue = 'Sign In';
+      this.showLogOutBtn = false;
+
+    }
+    
+  }
+
+
 }

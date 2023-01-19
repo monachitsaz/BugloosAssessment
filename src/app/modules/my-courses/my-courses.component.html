@@ -1,1 +1,12 @@
-<p>my-courses works!</p>
+<div class="products-container">
+    <h4><strong>My Courses</strong></h4>
+    <div class="row">
+        <ng-container *ngFor="let item of products$ | async;let i=index">
+            <div class="col-md-3 course-item">
+                <img [src]="transform(item.thumbnailBase64)" class="course-img">
+                <p class="course-title">{{item.title}}</p>
+                <p class="course-text">{{item.text}}</p>
+            </div>
+        </ng-container>
+    </div>
+</div>

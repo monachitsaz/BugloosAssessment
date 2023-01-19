@@ -1,15 +1,5 @@
 <div class="container login-form row">
-    <div class="login-form-container col-5 offset-6">
-        <ng-container *ngIf="isRegistered; else elseTemplate">
-            <log-in></log-in>
-
-        </ng-container>
-        <ng-template #elseTemplate>
-            <sign-up (isSignup)="setAuthenticate()"></sign-up>
-
-        </ng-template>
-
+    <div class="login-form-container col-5 offset-6">    
+        <sign-up></sign-up>
     </div>
-
-
 </div>

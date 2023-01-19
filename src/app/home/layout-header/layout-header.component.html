@@ -1,21 +1,23 @@
-
-<div class="header">
-
-</div>
+<div class="header"></div>
 <br>
 <div class="topnav">
-  <img class="nav-item logo-img" src="../../../assets/logo.png" alt="" loading="lazy" />
+  <img class="nav-item logo-img" src="../../../assets/logo.png" alt="" />
   <div class="nav-items">
-    <a>Home</a>
-    <a routerLink='/courses'>All Course</a>
-    <a routerLink="my-courses">My Courses</a>
+    <a *ngIf="showLink" [routerLink]="['/courses/my-courses',this.id]">My Page</a>
+    <a routerLink='/courses/all'>Courses</a>
     <a routerLink="">Blog</a>
     <a routerLink="">Contact</a>
   </div>
 
   <div class="signinup">
-    <!-- <a *ngIf="!isLogin" (click)="logOut()"  routerLink='/login' class="signin-btn">{{signInValue}}</a> -->
-    <a  routerLink='sign-in' class="signin-btn">Sign in</a>
+    <ng-container *ngIf="!showLogOutBtn; else elseTemplate">
+      <a type="button" routerLink='sign-in' class="signin-btn">{{signInValue}}</a>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <a type="button" (click)="logOut()" class="signin-btn">{{signInValue}}</a>
+
+    </ng-template>
+
     <a type="button" routerLink='register' class="btn singup-btn"><strong>Sign Up</strong></a>
   </div>
 </div>

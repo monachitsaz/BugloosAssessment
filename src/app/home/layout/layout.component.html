@@ -1,8 +1,7 @@
 
 <div style="margin-top: 0;">
-   <layout-header></layout-header> 
+   <layout-header [showLogOutBtn]="showLogOutBtn" [signInValue]="signInValue"></layout-header> 
 </div>
 <br>
+<router-outlet (activate)="onOutletLoaded($event)"></router-outlet>
 
-<router-outlet></router-outlet>
-<layout-footer></layout-footer>
