@@ -7,7 +7,6 @@
 .course-item{
     border:2px solid green;
     border-radius: 0.5em;
-    margin:2px;
     height: fit-content;
 }
 
