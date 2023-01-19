@@ -26,7 +26,9 @@ import { SignInPageComponent } from './authentication/sign-in-page/sign-in-page.
   
   ],
   exports:[SharedModule],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

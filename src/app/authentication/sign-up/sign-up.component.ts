@@ -39,8 +39,7 @@ export class SignUpComponent implements OnInit {
 
   registerUser() {
     if (this.formGroup.controls.password.value == this.formGroup.controls.confirmPassword.value) {
-      let infoData: IUser = {
-        id:0,
+      let infoData = {     
         userName: this.formGroup.controls.userName.value,
         password: this.formGroup.controls.password.value,
         email: this.formGroup.controls.email.value,
@@ -53,7 +52,7 @@ export class SignUpComponent implements OnInit {
             next: (response) => {
               this.notification.showSuccess(response,'Info');
                this.isSignup.emit();
-              // this.router.navigate(['/login']);
+              this.router.navigate(['sign-in']);
             },
             error: (error: HttpErrorResponse) => {
               this.notification.showError(error,'oops!')

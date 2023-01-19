@@ -32,14 +32,16 @@ export class LoginComponent implements OnInit {
       this.noti.showError("Data is wrong", "oops!")
     }
     else {
-debugger
+
       let username = this.formGroup.controls.username.value;
       let password = this.formGroup.controls.password.value;
 
       this.api.login(username, password).subscribe({
-        next: (result) => {
+        next: (result:IUser) => {
           this.setAuthenticationStorage(result);
-          this.router.navigate(['courses']);
+          
+          let userId=result.id
+          this.router.navigateByUrl(`/courses/my-courses/${ userId }`,{ state: { userId } });
         },
         error: (err: HttpErrorResponse) => {
           this.noti.showError(err, "oops!")

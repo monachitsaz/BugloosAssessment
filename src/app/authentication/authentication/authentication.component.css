@@ -2,14 +2,14 @@ div.login-form {
     margin: auto;
     width: 55em;
     height: 35em;
-    background-image: url('../../../assets/login-3.png');
     background-repeat: no-repeat;
     border-radius: 0.5em;
     border: 2px solid rgb(233, 243, 237);
+    background-image: url('../../../assets/login-3.png');
+
 }
 
 div.login-form-container {
-    
     margin-top: 8em;
 }
 

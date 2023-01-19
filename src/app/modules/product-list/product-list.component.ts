@@ -1,11 +1,11 @@
-import { IUser } from './../../models/user.model';
-import { HttpClient } from '@angular/common/http';
+import { ISelectedProducts } from './../../models/selected-products.interface';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { IProduct } from 'src/app/models/product.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'product-list',
@@ -15,115 +15,61 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class ProductListComponent {
 
   products$ = new Observable<any>();
-  id
-  productModel: IProduct
   courseAdded: boolean = false;
-  buttonValue: string = 'Add it!'
-  toggleButton: boolean;
-  items: number[] = []
+  selectedProducts: ISelectedProducts[] = [];
+  userIsLogIn: boolean = false;
+  userId: string | null = localStorage.getItem('userId');
+
   constructor(private api: ApiService,
-    private sanitizer: DomSanitizer, private noti: NotificationService) { }
+    private sanitizer: DomSanitizer,
+    private noti: NotificationService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.getLibrary();
 
+    //to check if user has been logged in or not, if yes is allowed to add course
+    this.userId ? this.userIsLogIn = true : this.userIsLogIn = false;
+
+    //show all courses
+    this.getCourses();
   }
+
+  //convert base64 image for showing in ui
   transform(base64Image: string) {
     return 'data:image/jpg;base64,' +
       (this.sanitizer.bypassSecurityTrustResourceUrl(base64Image) as any).changingThisBreaksApplicationSecurity;
 
   }
-  getLibrary() {
-    this.products$ = this.api.getList('Product');
 
+  //get list of all courses 
+  getCourses() {
+    this.products$ = this.api.getList('Product');
   }
 
+  //select course to add to list of the user
   selectCourse(event, item) {
-    console.log(event)
+    let userId = Number(window.localStorage.getItem('userId'))
+
     if (event.returnValue == true) {
-      this.items.push(item.id)
+      this.selectedProducts.push({ productId: item.id, userId: userId })
     }
     else {
-      this.items.forEach((e, i) => {
-        if (e == item.id) delete this.items[i]
+      this.selectedProducts.forEach((e, i) => {
+        if (e.productId == item.id) delete this.selectedProducts[i]
       })
     }
-    // console.log(id)
-    // toggleButton=!toggleButton
-
-    if (!this.courseAdded) {
-      event.currentTarget.classList.remove('btn-primary');
-
-      event.currentTarget.classList.add('btn-success');
-      event.currentTarget.innerText = 'Added';
-    }
-    else {
-      event.currentTarget.classList.remove('btn-success');
-      event.currentTarget.classList.add('btn-primary');
-      event.currentTarget.innerText = 'Add it!';
-    }
-
-
-    // }
-    // else{
-    //   event.currentTarget.classList.remove('btn-success');
-    //   event.currentTarget.classList.add('btn-primary');
-    //   event.currentTarget.innerText = 'Add it';
-    // }
-
-    // event.currentTarget.setAttribute('class', 'active');
-
-    let elements = document.querySelectorAll('.course-item');
-
-    elements.forEach((el, index) => {
-      // console.log(el)
-
-
-      // el.children[3].classList.remove('btn-primary');
-      // el.children[3].classList.add('btn-success');
-      // event.currentTarget.classList.remove('btn-primary');
-      // event.currentTarget.classList.add('btn-success');
-      // event.currentTarget.innerText = 'Added';
-
-
-      // el.classList.add('image-libray');
-    })
-    // if (!this.courseAdded) {
-    //   event.currentTarget.classList.value = 'btn btn-sm btn-primary col-12';
-    //   event.currentTarget.innerText = 'Add it!';
-    // }
-    // else {
-    //   event.currentTarget.classList.value = 'btn btn-sm btn-success col-12';
-    //   event.currentTarget.innerText = 'Added!';
-
-    // }
-
-
-
-
   }
+
+  //save selected courses by user
   saveCourses() {
-
-    this.api.create(this.items, 'ProductUser')
-  }
-
-  selectId(event, id: number, i: number) {
-    // console.log(event.currentTarget);
-    // this.selectImaged=true
-    //به منظور تغییر استایل در داخل کامپوننت
-    let elements = document.querySelectorAll('img.active');
-    elements.forEach(el => {
-      el.classList.remove('active');
-      el.classList.add('image-libray');
+    this.api.create(this.selectedProducts, 'ProductUser').subscribe({
+      next: (res) => {
+        this.noti.showSuccess(res, 'Info')
+        let userId = localStorage.getItem('userId')
+        this.router.navigateByUrl(`/courses/my-courses/${userId}`, { state: { userId } });
+      },
+      error: (err: HttpErrorResponse) => { this.noti.showError(err, 'oops!') }
     })
-    // document.querySelector("img.active").classList.remove("active");
-    event.currentTarget.setAttribute('class', 'active');
-    this.api.getById(id, 'Product').subscribe((response: IProduct) => {
-      this.id = response.id
-      this.productModel = response
-    })
-
   }
-
 
 }

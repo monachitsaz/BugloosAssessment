@@ -29,6 +29,8 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/${url}/${id}`);
   }
 
+  
+
   create(data,url:string): Observable<any> {
     return this.http.post(`${this.baseUrl}/${url}`, data,{responseType: 'text'});
   }
@@ -38,19 +40,8 @@ export class ApiService {
   
     );
   }
-  createFile(data,url:string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/${url}`, data,httpOptions);
-  }
 
-  update(data,url:string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${url}`, data,{responseType: 'text'});
-  }
 
-  delete(url:string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${url}`);
-  }
-
-  
   login(username: string, password: string): Observable<any> {
     return this.http.post(this.baseUrl+'/Login', { username, password }, httpOptions)
   }
